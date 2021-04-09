@@ -13,8 +13,22 @@ folders that your model needs under the model directory.
 **Important: All code that your model uses or references *MUST* be contained in the
 model directory.**
 
+
+## Debugging your Model
+
+If you need extra information on how your model is performing, a built-in debugging server is provided
+which will connect to the Docker container the model is running in and return error messages.
+
+If you would like to use this, in the root directory of the project, run the command 
+`docker-compose build debug` and then `docker-compose up debug`. Open a web browser and navigate to
+[http://localhost:4650]('http://localhost:4650').
+
+As you make changes to your model the results will appear on the web page showing the initialization
+status and a prediction result on a test image.
+
+
 ## Testing your Model
 
-In the root directory of the project, run the command `docker-compose build` and then
-`docker-compose up`. You will see the results of the test cases in your terminal. If all
+In the root directory of the project, run the command `docker-compose build test` and then
+`docker-compose up test`. You will see the results of the test cases in your terminal. If all
 test cases pass, then your model will work in the server environment.

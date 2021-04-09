@@ -6,8 +6,7 @@ services:
       context: .
       dockerfile: debug.Dockerfile
     volumes:
-      - ./debug/main.py:/app
-      - ./debug/index.html:/app
+      - ./debug:/app
       - ./model:/app/model
       - ./test/images:/app/images
     environment:
