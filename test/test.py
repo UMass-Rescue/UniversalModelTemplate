@@ -1,6 +1,6 @@
 import pytest
 from model.model import init, predict
-from model.config import model_name, model_tags
+from model.config import model_name, model_tags, model_type
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -28,6 +28,12 @@ def test_model_tags():
 
 
 @pytest.mark.timeout(120)
+def test_model_type():
+    assert type(model_type) is str  # Make sure this is a string
+    assert model_type in ['image', 'text']  # Ensure type is valid
+    assert len(model_type) > 0  # Ensure name is non empty
+
+@pytest.mark.timeout(120)
 def test_predict_single_image():
     image_file = '1.png'
     prediction_result = predict(image_file)
@@ -49,8 +55,9 @@ def test_predict_single_image():
 
 @pytest.mark.timeout(120)
 def test_bad_image_file():
-    with pytest.raises(FileNotFoundError):
-        predict('iDoNotExist.txt')
+    if model_type == 'image':
+        with pytest.raises(FileNotFoundError):
+            predict('iDoNotExist.txt')
 
 
 @pytest.mark.timeout(120)
