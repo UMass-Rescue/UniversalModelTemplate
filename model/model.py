@@ -1,3 +1,5 @@
+from typing import List
+
 from PIL import Image
 import time
 
@@ -40,3 +42,28 @@ def predict(prediction_input):
             'isRed': 1
         }
     }
+
+
+def predict_batch(prediction_inputs: List[str]):
+    """
+    Create a batch prediction. This should have the same functionality as the predict function, however it
+    will allow for any optimizations.
+
+    This will be passed prediction inputs of length "batch_size", configurable in the model/config.py
+    batch_size variable.
+
+    If your model does not support batch prediction, you may disregard this method and your model will
+    still be completely functional.
+
+    The return signature for this message is a dictionary, with each key being the name of a prediction input in
+    prediction_inputs, and each value being the same format as what is returned in the singular predict() method.
+
+    """
+
+    results = {}
+
+    # This is a placeholder if your code does not have any batch optimizations.
+    for prediction_input in prediction_inputs:
+        results[prediction_input] = predict(prediction_input)
+
+    return results
